@@ -9,6 +9,23 @@ def handle_client(client_socket):
         try:
             data = client_socket.recv(1024)
             if not data:
+                break
+
+            print(f"Datos recibidos: {data.decode('utf-8')}")
+            # Enviar datos a las réplicas y esperar confirmación
+            for replica in replicas:
+                replica.send(data)
+                ack = replica.recv(1024)  # Esperar confirmación
+                if ack.decode('utf-8') != 'ACK':
+                    print("Fallo en la confirmación de la réplica")
+        except ConnectionResetError:
+            break
+    client_socket.close()
+
+    while True:
+        try:
+            data = client_socket.recv(1024)
+            if not data:
                 break  
             print(f"Datos recibidos: {data.decode('utf-8')}")
             
