@@ -1,1 +1,1 @@
-Este es el codigo por defecto de la practica 1
+Este es el codigo de la consistencia causal
