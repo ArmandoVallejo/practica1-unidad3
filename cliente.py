@@ -3,7 +3,7 @@ import socket
  
 def send_data_to_master(data): 
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
-    client.connect(('127.0.0.1', 9999))  # IP del servidor maestro 
+    client.connect(('192.168.223.204', 9999))  # IP del servidor maestro 
  
     client.send(data.encode('utf-8')) 
     client.close() 
